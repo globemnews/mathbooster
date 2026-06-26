@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Math Blaster - A fast-paced math solving shooting game">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Math Blaster - Educational Shooting Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/hud.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/ui-components.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="stylesheet" href="css/ads.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-title">Math Blaster</div>
+            <div class="loading-subtitle">Educational Shooting Game</div>
+            <div class="loading-bar-container"><div class="loading-bar" id="loadingBar"></div></div>
+            <div class="loading-status" id="loadingStatus">Loading...</div>
+            <div class="loading-tip" id="loadingTip">Tip: Solve faster to build combos!</div>
+        </div>
+    </div>
+
+    <!-- Stars Background -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- HUD -->
+        <div class="hud" id="hud" style="display:none;">
+            <div class="hud-left">
+                <span class="hud-label">Score</span>
+                <span class="hud-value score" id="scoreDisplay">0</span>
+                <span class="hud-label">Rank <span id="levelDisplay">1</span></span>
+                <div class="xp-bar-container"><div class="xp-bar" id="xpBar" style="width:0%"></div></div>
+            </div>
+            <div class="hud-center">
+                <span class="hud-label">Wave</span>
+                <span class="hud-value" id="waveDisplay">1</span>
+            </div>
+            <div class="hud-right">
+                <span class="hud-label">Health</span>
+                <div class="health-bar-container"><div class="health-bar" id="healthBar" style="width:100%"></div></div>
+                <span class="hud-label" style="margin-top:4px;">Combo</span>
+                <span class="hud-value combo" id="comboDisplay">x1</span>
+                <span class="hud-label">SPM: <span id="wpmDisplay">0</span></span>
+            </div>
+        </div>
+
+        <!-- Powerup Indicators -->
+        <div class="powerup-indicators" id="powerupIndicators" style="display:none;"></div>
+
+        <!-- Pause Button -->
+        <button class="pause-btn" id="pauseBtn" style="display:none;" aria-label="Pause">
+            <span class="icon icon-pause" id="pauseIcon"></span>
+        </button>
+
+        <!-- Keyboard Button -->
+        <button class="keyboard-btn" id="keyboardBtn" style="display:none;" aria-label="Open Keyboard">
+            <span class="icon icon-keyboard"></span>
+        </button>
+
+        <!-- Input Area -->
+        <div class="input-area" id="inputArea" style="display:none;">
+            <div class="typing-display" id="typingDisplay"></div>
+        </div>
+
+        <!-- Hidden Input -->
+        <input type="text" id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-hidden="true" inputmode="numeric">
+
+        <!-- ==================== SCREENS ==================== -->
+
+        <!-- Main Menu -->
+        <div class="screen-overlay hidden" id="mainMenu">
+            <div class="game-title">Math Blaster</div>
+            <div class="game-subtitle">Solve Problems to Survive</div>
+
+            <!-- Difficulty selector -->
+            <div class="difficulty-selector" id="difficultySelector">
+                <button class="diff-btn active" data-diff="easy">Easy</button>
+                <button class="diff-btn" data-diff="normal">Normal</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+                <button class="diff-btn" data-diff="insane">Insane</button>
+            </div>
+
+            <!-- New Game: always starts from wave 1 -->
+            <button class="menu-btn primary" id="btnStartGame">
+                <span class="icon icon-play icon-inline"></span>
+                New Game
+            </button>
+
+            <!-- Continue: resumes from saved wave (hidden if no save) -->
+            <button class="menu-btn tertiary" id="btnContinue" style="display:none;">
+                <span class="icon icon-resume icon-inline"></span>
+                Continue
+            </button>
+
+            <!-- Other menu buttons -->
+            <button class="menu-btn secondary" id="btnLeaderboard">
+                <span class="icon icon-trophy icon-inline"></span>
+                Leaderboard
+            </button>
+
+            <button class="menu-btn secondary" id="btnSettings">
+                <span class="icon icon-settings icon-inline"></span>
+                Settings
+            </button>
+
+            <!-- Saved wave indicator (shows which wave player will continue from) -->
+            <div class="menu-hint" id="savedWaveHint">Solve the problems to shoot them down!</div>
+        </div>
+
+        <!-- Game Over -->
+        <div class="screen-overlay hidden" id="gameOverScreen">
+            <div class="screen-title game-over-title">Game Over</div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-value" id="finalScore">0</div><div class="stat-label">Score</div></div>
+                <div class="stat-card"><div class="stat-value" id="finalWave">0</div><div class="stat-label">Wave</div></div>
+                <div class="stat-card"><div class="stat-value" id="finalAccuracy">0%</div><div class="stat-label">Accuracy</div></div>
+                <div class="stat-card"><div class="stat-value" id="finalWPM">0</div><div class="stat-label">Avg SPM</div></div>
+                <div class="stat-card"><div class="stat-value" id="finalCombo">0</div><div class="stat-label">Best Combo</div></div>
+                <div class="stat-card"><div class="stat-value" id="finalWords">0</div><div class="stat-label">Problems Solved</div></div>
+            </div>
+
+            <div class="new-high-score hidden" id="newHighScore">
+                <span class="icon icon-star icon-inline earned"></span>
+                NEW HIGH SCORE
+                <span class="icon icon-star icon-inline earned"></span>
+            </div>
+
+            <!-- Play Again starts from wave 1 -->
+            <button class="menu-btn primary" id="btnPlayAgain">
+                <span class="icon icon-retry icon-inline"></span>
+                Play Again
+            </button>
+
+            <button class="menu-btn secondary" id="btnGameOverMenu">
+                <span class="icon icon-home icon-inline"></span>
+                Main Menu
+            </button>
+        </div>
+
+        <!-- Pause -->
+        <div class="screen-overlay hidden" id="pauseScreen">
+            <div class="screen-title">Paused</div>
+
+            <button class="menu-btn primary" id="btnResume">
+                <span class="icon icon-resume icon-inline"></span>
+                Resume
+            </button>
+
+            <button class="menu-btn tertiary" id="btnPauseSettings">
+                <span class="icon icon-settings icon-inline"></span>
+                Settings
+            </button>
+
+            <button class="menu-btn secondary" id="btnQuit">
+                <span class="icon icon-close icon-inline"></span>
+                Quit
+            </button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="screen-overlay hidden" id="leaderboardScreen">
+            <div class="screen-title">Leaderboard</div>
+            <div class="leaderboard" id="leaderboardList"></div>
+            <button class="menu-btn secondary" id="btnLeaderboardBack">
+                <span class="icon icon-home icon-inline"></span>
+                Back
+            </button>
+        </div>
+
+        <!-- Settings -->
+        <div class="screen-overlay hidden" id="settingsScreen">
+            <div class="screen-title">Settings</div>
+
+            <div class="settings-panel">
+                <div class="setting-row"><span class="setting-label">Sound Effects</span><div class="toggle-switch active" id="toggleSfx" data-setting="sfx"></div></div>
+                <div class="setting-row"><span class="setting-label">Music</span><div class="toggle-switch active" id="toggleMusic" data-setting="music"></div></div>
+                <div class="setting-row"><span class="setting-label">Screen Shake</span><div class="toggle-switch active" id="toggleShake" data-setting="shake"></div></div>
+                <div class="setting-row"><span class="setting-label">Particles</span><div class="toggle-switch active" id="toggleParticles" data-setting="particles"></div></div>
+                <div class="setting-row"><span class="setting-label">Dark Problems</span><div class="toggle-switch" id="toggleDarkWords" data-setting="darkWords"></div></div>
+                <div class="setting-row"><span class="setting-label">Fullscreen</span><div class="toggle-switch" id="toggleFullscreen" data-setting="fullscreen"></div></div>
+                <div class="setting-row" id="keyboardTypeRow" style="display:none;"><span class="setting-label">Keyboard Type</span><button class="keyboard-type-btn" id="btnKeyboardType">Choose</button></div>
+                <div class="setting-row"><span class="setting-label">Reset Progress</span><button class="reset-btn" id="btnResetProgress">Reset</button></div>
+            </div>
+
+            <button class="menu-btn secondary" id="btnSettingsBack">
+                <span class="icon icon-home icon-inline"></span>
+                Back
+            </button>
+        </div>
+
+        <!-- Keyboard Choice (mobile only) -->
+        <div class="screen-overlay hidden" id="keyboardChoiceScreen">
+            <div class="screen-title">Choose Keyboard</div>
+            <p style="color:rgba(255,255,255,0.5);text-align:center;max-width:300px;margin-bottom:24px;font-size:14px;line-height:1.6;">How would you like to enter answers?</p>
+
+            <button class="menu-btn primary" id="btnChooseBuiltIn"><span class="icon icon-keyboard icon-inline"></span> Game Keyboard</button>
+            <p style="color:rgba(255,255,255,0.3);text-align:center;max-width:280px;margin:4px 0 16px;font-size:11px;">Built-in on-screen number pad</p>
+
+            <button class="menu-btn secondary" id="btnChooseNative"><span class="icon icon-settings icon-inline"></span> Phone Keyboard</button>
+            <p style="color:rgba(255,255,255,0.3);text-align:center;max-width:280px;margin:4px 0 16px;font-size:11px;">Your phone's default keyboard</p>
+
+            <p style="color:rgba(255,255,255,0.2);text-align:center;font-size:10px;margin-top:12px;">You can change this later in Settings</p>
+        </div>
+
+        <!-- Built-in Game Keyboard (Numbers + Operators) -->
+        <div class="game-keyboard" id="gameKeyboard" style="display:none;">
+            <div class="gk-row">
+                <button class="gk-key" data-key="1">1</button>
+                <button class="gk-key" data-key="2">2</button>
+                <button class="gk-key" data-key="3">3</button>
+                <button class="gk-key" data-key="4">4</button>
+                <button class="gk-key" data-key="5">5</button>
+                <button class="gk-key" data-key="6">6</button>
+                <button class="gk-key" data-key="7">7</button>
+                <button class="gk-key" data-key="8">8</button>
+                <button class="gk-key" data-key="9">9</button>
+                <button class="gk-key" data-key="0">0</button>
+            </div>
+            <div class="gk-row">
+                <button class="gk-key" data-key="-">-</button>
+                <button class="gk-key gk-backspace" data-key="backspace">&#9003;</button>
+            </div>
+        </div>
+
+        <!-- Ad Overlay -->
+        <div class="ad-overlay hidden" id="adOverlay">
+            <div class="ad-container" id="adContainer">
+                <button class="ad-close-btn" id="adCloseBtn" aria-label="Close Ad"><span class="icon icon-close"></span></button>
+                <div class="ad-content" id="adContent"></div>
+                <div class="ad-timer" id="adTimer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config/ads-config.js"></script>
+    <script src="config/custom-words.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/audio-engine.js"></script>
+    <script src="js/particle-system.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/projectile.js"></script>
+    <script src="js/powerup-system.js"></script>
+    <script src="js/wave-manager.js"></script>
+    <script src="js/typing-system.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/hud.js"></script>
+    <script src="js/screen-manager.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/ads.js"></script>
+    <script src="js/mobile.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

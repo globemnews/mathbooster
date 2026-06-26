@@ -1,0 +1,109 @@
+/* ============================================
+   Math Blaster - Advertisement Styles
+   ============================================ */
+
+.ad-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: var(--z-ads); display: flex; align-items: center; justify-content: center;
+    background: rgba(10, 10, 26, 0.92);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    animation: fadeIn 0.3s ease;
+}
+.ad-overlay.hidden { display: none; }
+
+.ad-container {
+    position: relative; background: var(--bg-medium);
+    border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+    padding: var(--space-2xl); padding-top: 48px;
+    max-width: 90vw; max-height: 85vh; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(0,212,255,0.1);
+    animation: scaleIn 0.3s ease;
+    display: flex; flex-direction: column; align-items: center;
+}
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+/* ============================================
+   AD CLOSE BUTTON
+   White background with red X icon
+   Clearly visible on any background
+   ============================================ */
+.ad-close-btn {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #ff4466;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    z-index: 5;
+    padding: 0;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.ad-close-btn:hover {
+    background: #ffffff;
+    border-color: #ff0044;
+    box-shadow: 0 2px 15px rgba(255,0,68,0.3);
+}
+.ad-close-btn:active { transform: scale(0.9); }
+
+/* X icon inside close button - RED color on white */
+.ad-close-btn .icon-close::before,
+.ad-close-btn .icon-close::after {
+    background: #ff0044 !important;
+    height: 2.5px;
+}
+
+.ad-close-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ad-content {
+    width: 100%; min-height: 100px; display: flex; align-items: center;
+    justify-content: center; text-align: center; overflow: hidden;
+}
+.ad-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+.ad-content iframe { max-width: 100%; border: none; border-radius: var(--radius-md); }
+
+.ad-placeholder {
+    color: rgba(255,255,255,0.5); font-size: 12px; font-family: var(--font-body);
+    letter-spacing: 1px; padding: 40px 30px;
+    border: 1px dashed rgba(255,255,255,0.15); border-radius: var(--radius-md);
+    width: 100%; text-align: center; background: rgba(255,255,255,0.02);
+    min-height: 200px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; line-height: 1.6;
+}
+.ad-placeholder p { margin: 0; }
+
+.ad-timer {
+    margin-top: var(--space-md); font-family: var(--font-display); font-size: 11px;
+    color: var(--text-muted); letter-spacing: 1px; text-align: center; min-height: 18px;
+}
+.ad-timer .timer-count { color: var(--neon-blue); font-weight: 700; }
+
+.ad-size-300x250 .ad-container { width: 340px; min-height: 290px; }
+.ad-size-300x250 .ad-content { width: 300px; height: 250px; }
+.ad-size-320x50 .ad-container { width: 360px; min-height: 90px; padding: var(--space-md); padding-top: 40px; }
+.ad-size-320x50 .ad-content { width: 320px; height: 50px; }
+.ad-size-728x90 .ad-container { width: min(90vw, 768px); min-height: 130px; }
+.ad-size-728x90 .ad-content { width: 728px; max-width: 100%; height: 90px; }
+
+@media (max-width: 480px) {
+    .ad-container { padding: var(--space-lg); padding-top: 44px; max-width: 95vw; border-radius: var(--radius-md); }
+    .ad-size-300x250 .ad-container { width: 95vw; }
+    .ad-size-300x250 .ad-content { width: 100%; height: auto; min-height: 200px; }
+    .ad-placeholder { padding: 24px 16px; min-height: 150px; }
+}
+@media (max-width: 360px) {
+    .ad-container { padding: var(--space-md); padding-top: 40px; }
+    .ad-close-btn { width: 32px; height: 32px; }
+    .ad-placeholder { padding: 20px 12px; min-height: 120px; }
+}

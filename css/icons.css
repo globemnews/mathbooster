@@ -1,0 +1,421 @@
+/* ============================================
+   Math Blaster - Pure CSS Icons
+   All icons use explicit colors for visibility.
+   No SVG files needed.
+   ============================================ */
+
+/* ---------- Base Icon ---------- */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Inline icon inside buttons */
+.icon-inline {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+/* Small icon */
+.icon-sm {
+    width: 14px;
+    height: 14px;
+}
+
+/* Large icon (level complete stars) */
+.icon-lg {
+    width: 48px;
+    height: 48px;
+}
+
+/* Medium icon (level grid mini stars) */
+.icon-md {
+    width: 8px;
+    height: 8px;
+}
+
+/* ---------- PLAY ---------- */
+.icon-play::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent #ffffff;
+}
+.icon-play.icon-inline::after { border-width: 4px 0 4px 7px; }
+.icon-play.icon-lg::after { border-width: 14px 0 14px 22px; }
+
+/* ---------- PAUSE ---------- */
+.icon-pause::before,
+.icon-pause::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    width: 3px;
+    height: 60%;
+    background: #ffffff;
+    border-radius: 1px;
+}
+.icon-pause::before { left: 30%; }
+.icon-pause::after { right: 30%; }
+
+/* ---------- RESUME ---------- */
+.icon-resume::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent #ffffff;
+}
+.icon-resume.icon-inline::after { border-width: 4px 0 4px 7px; }
+
+/* ---------- RETRY ---------- */
+.icon-retry::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 60%;
+    height: 60%;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-right-color: transparent;
+}
+.icon-retry::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    right: 22%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 5px 5px;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+/* ---------- CLOSE / X ---------- */
+.icon-close::before,
+.icon-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 65%;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 1px;
+}
+.icon-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.icon-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* ---------- HOME ---------- */
+.icon-home::before {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 7px 8px;
+    border-color: transparent transparent #ffffff transparent;
+}
+.icon-home::after {
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 1px;
+}
+
+/* ---------- SETTINGS ---------- */
+.icon-settings::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+.icon-settings::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    clip-path: polygon(50% 0%, 63% 10%, 80% 5%, 80% 22%, 100% 30%, 90% 45%, 100% 60%, 85% 68%, 80% 85%, 65% 80%, 50% 100%, 35% 80%, 20% 85%, 15% 68%, 0% 60%, 10% 45%, 0% 30%, 20% 22%, 20% 5%, 37% 10%);
+}
+
+/* ---------- TROPHY ---------- */
+.icon-trophy::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 0 0 5px 5px;
+}
+.icon-trophy::before {
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 1px;
+}
+
+/* ---------- STAR ---------- */
+.icon-star::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.icon-star.earned::after { background: #ffbe0b; }
+.icon-star.empty::after { background: rgba(255, 255, 255, 0.15); }
+
+/* ---------- LOCK ---------- */
+.icon-lock::after {
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 7px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+.icon-lock::before {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 6px;
+    border: 2px solid #ffffff;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+}
+
+/* ---------- KEYBOARD ---------- */
+.icon-keyboard::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 2px;
+}
+.icon-keyboard::before {
+    content: '';
+    position: absolute;
+    bottom: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 1px;
+}
+
+/* ---------- HEART ---------- */
+.icon-heart::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(50% 85%, 15% 55%, 0% 35%, 0% 20%, 10% 5%, 25% 0%, 40% 5%, 50% 20%, 60% 5%, 75% 0%, 90% 5%, 100% 20%, 100% 35%, 85% 55%);
+}
+
+/* ---------- SHIELD ---------- */
+.icon-shield::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 14px;
+    background: #ffffff;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 65%, 50% 100%, 0% 65%, 0% 25%);
+}
+
+/* ---------- BOLT ---------- */
+.icon-bolt::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(60% 0%, 25% 50%, 50% 50%, 40% 100%, 75% 45%, 50% 45%);
+}
+
+/* ---------- BOMB ---------- */
+.icon-bomb::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 11px;
+    height: 11px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+.icon-bomb::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 25%;
+    width: 2px;
+    height: 6px;
+    background: #ffffff;
+    transform: rotate(-30deg);
+    border-radius: 1px;
+}
+
+/* ---------- SNOWFLAKE ---------- */
+.icon-snowflake::before,
+.icon-snowflake::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #ffffff;
+}
+.icon-snowflake::before { width: 2px; height: 80%; transform: translate(-50%, -50%); }
+.icon-snowflake::after { width: 80%; height: 2px; transform: translate(-50%, -50%); }
+
+/* ---------- SLOW ---------- */
+.icon-slow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+.icon-slow::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform-origin: bottom center;
+    width: 2px;
+    height: 5px;
+    background: #ffffff;
+    transform: translateX(-50%) rotate(30deg);
+    border-radius: 1px;
+}
+
+/* ---------- DOUBLE ---------- */
+.icon-double::after {
+    content: '2x';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    font-weight: 900;
+    font-family: var(--font-display);
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* ---------- CROWN ---------- */
+.icon-crown::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(10% 80%, 10% 35%, 30% 55%, 50% 20%, 70% 55%, 90% 35%, 90% 80%);
+}
+
+/* ---------- GHOST ---------- */
+.icon-ghost::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(20% 100%, 20% 40%, 25% 20%, 40% 8%, 60% 8%, 75% 20%, 80% 40%, 80% 100%, 65% 85%, 50% 100%, 35% 85%);
+}
+
+/* ---------- ZIGZAG ---------- */
+.icon-zigzag::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    clip-path: polygon(0% 50%, 20% 15%, 40% 85%, 60% 15%, 80% 85%, 100% 50%, 100% 60%, 80% 95%, 60% 25%, 40% 95%, 20% 25%, 0% 60%);
+}
+
+/* ---------- CHECK ---------- */
+.icon-check::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 5px;
+    height: 10px;
+    border-bottom: 2.5px solid #ffffff;
+    border-right: 2.5px solid #ffffff;
+}

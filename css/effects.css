@@ -1,0 +1,359 @@
+/* ============================================
+   Math Blaster - Effects & Animations
+   Screen shake, flashes, transitions,
+   and all reusable animation keyframes
+   ============================================ */
+
+/* ---------- Screen Shake ---------- */
+.shake {
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-5px) translateY(2px); }
+    20% { transform: translateX(4px) translateY(-1px); }
+    30% { transform: translateX(-6px) translateY(1px); }
+    40% { transform: translateX(3px) translateY(-2px); }
+    50% { transform: translateX(-4px) translateY(2px); }
+    60% { transform: translateX(5px) translateY(-1px); }
+    70% { transform: translateX(-3px) translateY(1px); }
+    80% { transform: translateX(4px) translateY(-2px); }
+    90% { transform: translateX(-2px) translateY(1px); }
+}
+
+.shake-light {
+    animation: shakeLight 0.2s ease;
+}
+
+@keyframes shakeLight {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+/* ---------- Screen Flash Overlay ---------- */
+.screen-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: var(--z-effects);
+    animation: flash 0.3s ease forwards;
+}
+
+@keyframes flash {
+    0% { opacity: 0.3; }
+    100% { opacity: 0; }
+}
+
+/* Damage flash (red) */
+.screen-flash.damage {
+    background: radial-gradient(ellipse at center, rgba(255, 0, 50, 0.4), transparent 70%);
+}
+
+/* Heal flash (green) */
+.screen-flash.heal {
+    background: radial-gradient(ellipse at center, rgba(0, 255, 135, 0.3), transparent 70%);
+}
+
+/* Bomb flash (pink) */
+.screen-flash.bomb {
+    background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.4), transparent 70%);
+}
+
+/* Powerup flash (blue) */
+.screen-flash.powerup {
+    background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.3), transparent 70%);
+}
+
+/* Level up flash (purple) */
+.screen-flash.levelup {
+    background: radial-gradient(ellipse at center, rgba(131, 56, 236, 0.3), transparent 70%);
+}
+
+/* ---------- Fade Transitions ---------- */
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ---------- Slide Transitions ---------- */
+.slide-up-in {
+    animation: slideUpIn 0.4s ease forwards;
+}
+
+.slide-down-out {
+    animation: slideDownOut 0.4s ease forwards;
+}
+
+@keyframes slideUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+/* ---------- Scale Transitions ---------- */
+.scale-in {
+    animation: scaleIn 0.3s ease forwards;
+}
+
+.scale-out {
+    animation: scaleOut 0.3s ease forwards;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* ---------- Pulse Animations ---------- */
+.pulse {
+    animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pulse-glow {
+    animation: pulseGlow 2s ease infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.2);
+    }
+}
+
+/* ---------- Bounce ---------- */
+.bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ---------- Rotate ---------- */
+.rotate-in {
+    animation: rotateIn 0.4s ease forwards;
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+/* ---------- Glow Text ---------- */
+.glow-text-blue {
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.glow-text-pink {
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px rgba(255, 0, 110, 0.3);
+}
+
+.glow-text-green {
+    text-shadow: 0 0 10px var(--neon-green), 0 0 20px rgba(0, 255, 135, 0.3);
+}
+
+.glow-text-yellow {
+    text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px rgba(255, 190, 11, 0.3);
+}
+
+.glow-text-purple {
+    text-shadow: 0 0 10px var(--neon-purple), 0 0 20px rgba(131, 56, 236, 0.3);
+}
+
+/* ---------- Border Glow ---------- */
+.glow-border-blue {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 212, 255, 0.05);
+}
+
+.glow-border-pink {
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.3), inset 0 0 15px rgba(255, 0, 110, 0.05);
+}
+
+.glow-border-green {
+    box-shadow: 0 0 15px rgba(0, 255, 135, 0.3), inset 0 0 15px rgba(0, 255, 135, 0.05);
+}
+
+/* ---------- Typing Cursor Blink ---------- */
+.cursor-blink {
+    animation: cursorBlink 0.7s ease infinite;
+}
+
+/* ---------- Ripple Effect ---------- */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 10%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.ripple:active::after {
+    transform: scale(0);
+    opacity: 1;
+    transition: 0s;
+}
+
+/* ---------- Stagger Children Animation ---------- */
+.stagger-children > * {
+    opacity: 0;
+    animation: staggerFadeIn 0.3s ease forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Particle Canvas Glow Effect (CSS fallback) ---------- */
+.canvas-glow {
+    filter: blur(0.5px);
+}
+
+/* ---------- Text Shimmer ---------- */
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        var(--neon-blue) 0%,
+        var(--neon-pink) 25%,
+        var(--neon-purple) 50%,
+        var(--neon-blue) 75%,
+        var(--neon-pink) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .star {
+        animation: none !important;
+        opacity: 0.5;
+    }
+
+    .shake,
+    .shake-light {
+        animation: none !important;
+    }
+}

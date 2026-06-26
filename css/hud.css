@@ -1,0 +1,228 @@
+/* ============================================
+   Math Blaster - HUD Styles
+   ============================================ */
+
+.hud {
+    position: absolute; top: 0; left: 0; width: 100%; z-index: var(--z-hud);
+    padding: var(--space-sm) var(--space-md); display: flex; justify-content: space-between;
+    align-items: flex-start; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.hud-left, .hud-right, .hud-center { display: flex; flex-direction: column; gap: var(--space-xs); }
+.hud-center { align-items: center; }
+.hud-right { align-items: flex-end; }
+.hud-label { font-family: var(--font-display); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; line-height: 1.2; }
+.hud-value { font-family: var(--font-display); font-size: 18px; font-weight: 900; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue), 0 0 20px rgba(0,212,255,0.3); line-height: 1.2; }
+.hud-value.score { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px rgba(255,190,11,0.3); }
+.hud-value.combo { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink), 0 0 20px rgba(255,0,110,0.3); font-size: 22px; transition: transform var(--transition-fast); }
+.combo-active { animation: comboPulse 0.3s ease; }
+@keyframes comboPulse { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
+
+.health-bar-container { width: 120px; height: 8px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); }
+.health-bar { height: 100%; background: linear-gradient(90deg, var(--neon-green), var(--neon-green)); border-radius: var(--radius-sm); transition: width var(--transition-normal); will-change: width; }
+.health-bar.medium { background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow)); }
+.health-bar.low { background: linear-gradient(90deg, var(--neon-pink), var(--neon-orange)); animation: healthPulse 0.5s ease infinite; }
+@keyframes healthPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.xp-bar-container { width: 100%; max-width: 200px; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.xp-bar { height: 100%; background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue)); border-radius: 3px; transition: width var(--transition-normal); will-change: width; }
+
+.powerup-indicators { position: absolute; top: 55px; left: 50%; transform: translateX(-50%); display: flex; gap: var(--space-sm); z-index: var(--z-hud); pointer-events: none; }
+.powerup-indicator { width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; position: relative; border: 2px solid; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+.powerup-indicator .icon-sm { width: 14px; height: 14px; }
+.powerup-timer { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 24px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden; }
+.powerup-timer-fill { height: 100%; border-radius: 2px; transition: width 0.1s linear; will-change: width; }
+
+/* ============================================
+   PAUSE BUTTON
+   White background, green icon, clearly visible
+   ============================================ */
+.pause-btn {
+    position: absolute;
+    top: var(--space-sm);
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--neon-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-buttons);
+    cursor: pointer;
+    pointer-events: all;
+    transition: all var(--transition-fast);
+    padding: 0;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.pause-btn:hover {
+    background: #ffffff;
+    box-shadow: 0 2px 15px rgba(0,255,135,0.3);
+}
+.pause-btn:active {
+    transform: scale(0.9);
+}
+
+/* Pause icon bars - green color on white background */
+.pause-btn .icon-pause::before,
+.pause-btn .icon-pause::after {
+    background: #00cc6a !important;
+}
+
+/* Resume icon triangle - green color on white background */
+.pause-btn .icon-resume::after {
+    border-color: transparent transparent transparent #00cc6a !important;
+}
+
+/* ============================================
+   KEYBOARD BUTTON
+   Hidden during gameplay when using built-in keyboard
+   ============================================ */
+.keyboard-btn {
+    position: absolute;
+    bottom: 70px;
+    right: var(--space-md);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--neon-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-buttons);
+    cursor: pointer;
+    pointer-events: all;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    padding: 0;
+    outline: none;
+}
+.keyboard-btn:active {
+    transform: scale(0.9);
+}
+
+/* Keyboard icon - blue on white */
+.keyboard-btn .icon-keyboard::after {
+    border-color: var(--neon-blue) !important;
+    background: transparent !important;
+}
+.keyboard-btn .icon-keyboard::before {
+    background: var(--neon-blue) !important;
+}
+
+.keyboard-btn.keyboard-open { bottom: calc(var(--keyboard-height, 300px) + 70px); }
+.keyboard-btn.gk-active { bottom: 225px; }
+
+/* Input Area */
+.input-area {
+    position: absolute; bottom: 0; left: 0; width: 100%; z-index: var(--z-hud);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 70%, transparent 100%);
+    transition: bottom 0.3s ease;
+}
+.input-area.keyboard-open { bottom: var(--keyboard-height, 0px); }
+.input-area.gk-active { bottom: 155px; }
+
+.typing-display {
+    width: 100%; padding: 10px 16px; background: rgba(255,255,255,0.05);
+    border: 2px solid var(--neon-blue); border-radius: var(--radius-lg);
+    font-family: var(--font-display); font-size: 20px; color: var(--neon-blue);
+    text-align: center; min-height: 48px; display: flex; align-items: center;
+    justify-content: center; letter-spacing: 3px; text-shadow: 0 0 10px var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0,212,255,0.2), inset 0 0 15px rgba(0,212,255,0.05);
+    position: relative; overflow: hidden; cursor: text; user-select: none; -webkit-user-select: none;
+}
+.typing-display::after { content: '|'; animation: cursorBlink 0.7s ease infinite; margin-left: 2px; color: var(--neon-blue); }
+.typing-display.has-text::after { animation: cursorBlink 0.5s ease infinite; }
+@keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.typing-correct { color: var(--neon-green); text-shadow: 0 0 8px rgba(0,255,135,0.5); }
+.typing-wrong { color: var(--neon-pink); text-shadow: 0 0 8px rgba(255,0,110,0.5); }
+.typing-remaining { color: var(--text-muted); }
+
+/* Wave Banner */
+.wave-banner { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--font-display); font-size: clamp(24px,7vw,48px); font-weight: 900; color: var(--neon-blue); text-shadow: 0 0 30px var(--neon-blue), 0 0 60px rgba(0,212,255,0.3); z-index: var(--z-floating); pointer-events: none; animation: waveBanner 2s ease forwards; text-align: center; white-space: nowrap; }
+.wave-banner.boss-wave { color: var(--neon-pink); text-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255,0,110,0.3); }
+@keyframes waveBanner { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0.5); } 20% { opacity: 1; transform: translate(-50%,-50%) scale(1.2); } 40% { transform: translate(-50%,-50%) scale(1); } 80% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,-50%) scale(0.8); } }
+
+.float-text { position: absolute; font-family: var(--font-display); font-weight: 900; pointer-events: none; z-index: var(--z-floating); animation: floatUp 1s ease forwards; white-space: nowrap; }
+@keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-60px) scale(0.5); } }
+
+.achievement-popup { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, rgba(131,56,236,0.9), rgba(0,212,255,0.9)); border-radius: var(--radius-lg); padding: 10px 20px; z-index: var(--z-popups); animation: achieveSlide 3s ease forwards; text-align: center; white-space: nowrap; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
+.achievement-popup .achieve-title { font-family: var(--font-display); font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+.achievement-popup .achieve-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text-primary); }
+@keyframes achieveSlide { 0% { opacity: 0; transform: translateX(-50%) translateY(-20px); } 10% { opacity: 1; transform: translateX(-50%) translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(-50%) translateY(-10px); } }
+
+/* ============================================
+   BUILT-IN GAME KEYBOARD
+   No keyboard icon button - removed to prevent
+   blocking letters like L
+   ============================================ */
+.game-keyboard {
+    position: fixed; bottom: 0; left: 0; width: 100%; z-index: var(--z-hud);
+    padding: 6px 4px 10px;
+    background: linear-gradient(to top, rgba(10,10,26,0.98) 0%, rgba(10,10,26,0.95) 100%);
+    border-top: 1px solid rgba(0,212,255,0.15);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    user-select: none; -webkit-user-select: none; touch-action: manipulation;
+}
+.gk-row { display: flex; gap: 4px; justify-content: center; width: 100%; max-width: 500px; }
+.gk-key {
+    flex: 1; max-width: 42px; height: 44px;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+    background: rgba(255,255,255,0.08); color: #ffffff;
+    font-family: var(--font-display); font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; outline: none; padding: 0;
+    transition: background 0.1s, transform 0.1s, border-color 0.1s;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.gk-key:active, .gk-key.pressed { background: rgba(0,212,255,0.3); border-color: var(--neon-blue); transform: scale(0.92); }
+.gk-key.correct { background: rgba(0,255,135,0.25); border-color: var(--neon-green); }
+.gk-key.wrong { background: rgba(255,0,110,0.25); border-color: var(--neon-pink); }
+
+/* Backspace key - wider, shows X text instead of icon */
+.gk-backspace {
+    flex: 1.5; max-width: 64px;
+    background: rgba(255,0,110,0.1); border-color: rgba(255,0,110,0.2);
+    font-size: 18px; color: #ff006e;
+}
+.gk-backspace:active { background: rgba(255,0,110,0.3); border-color: var(--neon-pink); }
+
+.gk-spacer { width: 20px; flex-shrink: 0; }
+.gk-spacer-half { width: 10px; flex-shrink: 0; }
+
+/* Keyboard type toggle in settings */
+.keyboard-type-btn {
+    font-family: var(--font-display); font-size: 11px; padding: 6px 16px;
+    border-radius: var(--radius-md); border: 1px solid var(--neon-blue);
+    background: rgba(0,212,255,0.1); color: var(--neon-blue);
+    cursor: pointer; transition: all var(--transition-normal);
+    text-transform: uppercase; letter-spacing: 1px; outline: none;
+    min-width: 80px; text-align: center;
+}
+.keyboard-type-btn:hover { background: rgba(0,212,255,0.2); }
+.keyboard-type-btn:active { transform: scale(0.95); }
+
+@media (max-width: 360px) {
+    .gk-key { height: 38px; font-size: 13px; max-width: 36px; }
+    .gk-backspace { max-width: 54px; font-size: 16px; }
+    .game-keyboard { padding: 4px 3px 8px; gap: 3px; }
+    .gk-row { gap: 3px; }
+    .input-area.gk-active { bottom: 135px; }
+    .keyboard-btn.gk-active { bottom: 205px; }
+}
+@media (min-width: 481px) {
+    .gk-key { height: 48px; font-size: 16px; max-width: 48px; }
+    .gk-backspace { max-width: 72px; font-size: 20px; }
+}
+@media (max-height: 420px) and (orientation: landscape) {
+    .gk-key { height: 34px; font-size: 12px; max-width: 36px; }
+    .game-keyboard { padding: 3px 4px 5px; gap: 2px; }
+    .gk-row { gap: 2px; }
+    .input-area.gk-active { bottom: 115px; }
+    .keyboard-btn.gk-active { bottom: 180px; }
+}
