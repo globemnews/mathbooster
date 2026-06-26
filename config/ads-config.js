@@ -39,7 +39,7 @@ var ADS_CONFIG = {
      * Master switch for all ads
      * Set to false to disable ALL ads globally
      */
-    enabled: true,
+    enabled: false,
 
     /**
      * Minimum time between ads in milliseconds
@@ -72,7 +72,7 @@ var ADS_CONFIG = {
          * Good for welcome/interstitial ads
          */
         gameStart: {
-            enabled: true,                    // Whether this placement is active
+            enabled: false,                    // Whether this placement is active
             closeDelay: 3,                    // Seconds before X button works
             sizeClass: 'ad-size-300x250',     // CSS size class for the container
 
@@ -93,7 +93,7 @@ var ADS_CONFIG = {
          * High-visibility placement (player must see it)
          */
         gameOver: {
-            enabled: true,
+            enabled: false,
             closeDelay: 2,
             sizeClass: 'ad-size-300x250',
 
@@ -112,7 +112,7 @@ var ADS_CONFIG = {
          * frequency: 2 means show every 2nd level completion
          */
         levelComplete: {
-            enabled: true,
+            enabled: false,
             closeDelay: 2,
             sizeClass: 'ad-size-300x250',
             frequency: 2,                      // Show every Nth level (2 = every other level)
